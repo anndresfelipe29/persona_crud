@@ -10,7 +10,7 @@ import (
 )
 
 type Cargo struct {
-	Id    int    `orm:"column(id);pk"`
+	Id    int    `orm:"column(id);pk;auto"`
 	Cargo string `orm:"column(cargo);null"`
 }
 

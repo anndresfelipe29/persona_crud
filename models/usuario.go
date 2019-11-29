@@ -10,7 +10,7 @@ import (
 )
 
 type Usuario struct {
-	Id       int    `orm:"column(id);pk"`
+	Id       int    `orm:"column(id);pk;auto"`
 	Nombre   string `orm:"column(nombre)"`
 	Apellido string `orm:"column(apellido)"`
 	CargoId  *Cargo `orm:"column(cargo_id);rel(fk)"`
@@ -48,7 +48,7 @@ func GetUsuarioById(id int) (v *Usuario, err error) {
 func GetAllUsuario(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Usuario))
+	qs := o.QueryTable(new(Usuario)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
